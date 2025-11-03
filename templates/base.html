@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SISTEMA DE GESTÃO DE ESTOQUE DE EQUIPAMENTOS ELETRÔNICOS{% endblock %}</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" 
+          rel="stylesheet" 
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" 
+          crossorigin="anonymous">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Seu CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+
+        <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sb-navbar {% if tipo_perfil == 'vilao' %}sb-navbar-vilao{% else %}sb-navbar-heroi{% endif %} sticky-top" style="background-color: #8b8b8b41;">
+        <div class="container">
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sbNavbar"
+                    aria-controls="sbNavbar" aria-expanded="false" aria-label="Alternar navegação">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="sbNavbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}"><i class="bi bi-house"></i> Início</a></li>
+
+                    {% if user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'cadastro' %}"><i class="bi bi-activity"></i> url cadastro - se aparecer, login com sucesso</a></li>
+                    {% endif %}
+                </ul>
+
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item me-lg-2 text-white-50 small d-none d-lg-block">
+                            <span><i class="bi bi-person-badge"></i> Olá, <strong id="username">{{ request.user.username }}</strong></span>
+                        </li>
+                        <li class="nav-item">
+                            <!-- Nota: Existem duas URLs nomeadas 'logout' no projeto; para evitar ambiguidade usamos o caminho explícito de usuários -->
+                            <a class="btn btn-outline-light btn-sm" href="/logout"><i class="bi bi-box-arrow-right"></i> Sair</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'login' %}"><i class="bi bi-box-arrow-in-right"></i> Entrar</a></li>
+                        <li class="nav-item ms-lg-2 mt-2 mt-lg-0"><a class="btn btn-warning btn-sm" href="{% url 'cadastro' %}"><i class="bi bi-person-plus"></i> Criar conta</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Conteúdo -->
+    <main class="container my-4">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light pt-5 pb-4 mt-auto">
+        <div class="container text-center text-md-start">
+            <div class="row text-center text-md-start">
+
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 fw-bold text-warning">
+                        Super Book
+                    </h5>
+                        <p style="color: #ccc;">SISTEMA DE GESTÃO DE ESTOQUE DE EQUIPAMENTOS ELETRÔNICOS.</p>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 fw-bold {% if  tipo_perfil == 'vilao' %}text-danger{% else %}text-warning{% endif %}">
+                        Contato
+                    </h5>
+                    <p style="color: #ccc;"><i class="bi bi-geo-alt-fill me-2"></i> Metrópolis, DC 12345</p>
+                    <p style="color: #ccc;"><i class="bi bi-envelope-fill me-2"></i> contato@superbook.com</p>
+                    <p style="color: #ccc;"><i class="bi bi-telephone-fill me-2"></i> +1 555 123 4567</p>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-md-7 col-lg-8">
+                    <p style="color: #ccc;">Todos os direitos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" 
+            crossorigin="anonymous"></script>
+</body>
+</html>

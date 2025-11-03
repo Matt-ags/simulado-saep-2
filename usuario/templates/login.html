@@ -1,4 +1,10 @@
- <form action="{% url 'login' %}" method="post" >
+{% extends "base.html" %}
+
+{% block title %}Cadastro{% endblock %}
+
+{% block content %}
+
+<form action="{% url 'login' %}" method="post" >
             {% csrf_token %}
             <div class="mb-3">
                 <input type="text" class="form-control form-control-lg bg-light border-0 shadow-sm" placeholder="Nome" name="nome" required>
@@ -15,6 +21,6 @@
                     <button type="submit" class="btn btn-lg btn-warning w-100 fw-bold text-dark" style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px;">ENTRAR!</button>
                 </div>
             </div>
- </form>
+</form>
 
- 
+{% endblock %}
