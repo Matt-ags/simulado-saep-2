@@ -1,0 +1,20 @@
+ <form action="{% url 'login' %}" method="post" >
+            {% csrf_token %}
+            <div class="mb-3">
+                <input type="text" class="form-control form-control-lg bg-light border-0 shadow-sm" placeholder="Nome" name="nome" required>
+            </div>
+            <div class="mb-4">
+                <input type="password" class="form-control form-control-lg bg-light border-0 shadow-sm" placeholder="Senha" name="senha" required>
+            </div>
+
+            <div class="row g-2">
+                <div class="col">
+                    <a href="/cadastro" class="btn btn-lg btn-danger w-100 fw-bold" style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px;">SEM ACESSO?</a>
+                </div>
+                <div class="col">
+                    <button type="submit" class="btn btn-lg btn-warning w-100 fw-bold text-dark" style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px;">ENTRAR!</button>
+                </div>
+            </div>
+ </form>
+
+ 

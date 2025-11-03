@@ -1,0 +1,30 @@
+<form action="{% url 'cadastro' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Conteúdo Tabs -->
+        <div class="tab-content" id="cadastroTabContent">
+
+          <!-- Passo 1 -->
+          <div class="tab-pane fade show active" id="identidade-pane" role="tabpanel" aria-labelledby="identidade-tab">
+            <div class="d-flex flex-column gap-3">
+
+              <div>
+                <label for="codinome" class="form-label fw-bold text-light">Nome</label>
+                <input type="text" class="form-control shadow-sm" id="nome" name="nome"
+                  placeholder="Digite seu Nome..." required>
+              </div>
+
+              <div>
+                <label for="senha" class="form-label fw-bold text-light">Senha</label>
+                <input type="password" class="form-control shadow-sm" id="senha" name="senha"
+                  placeholder="Digite sua senha..." required>
+              </div>
+
+              <div class="text-center mt-4">
+                <button type="submit" class="btn btn-warning fw-bold shadow px-5 py-2 rounded-pill">
+                  Cadastrar
+                </button>
+              </div>
+            </div>
+          </div>
+</form>

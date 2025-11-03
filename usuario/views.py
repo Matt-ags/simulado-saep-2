@@ -1,3 +1,50 @@
-from django.shortcuts import render
-
+from django.shortcuts import render, HttpResponse, redirect
+from django.contrib.auth.models import User # na docs, mostra que já temos "criado", usamos essa model como base :D
+from django.contrib.auth import authenticate, logout
+from django.contrib.auth import login as login_django
+from django.contrib.auth.decorators import login_required
+from .models import *
 # Create your views here.
+def cadastro(request):
+    if request.method == "GET":
+        return render(request, 'cadastro.html')
+    else:
+        nome = request.POST.get('nome')
+        senha = request.POST.get('senha')
+        user = User.objects.filter(username=nome).first()
+        
+        if user:
+            return HttpResponse('Já existe um user com este codi!')
+        
+        user = User.objects.create_user(username=nome, password=senha)
+        user.save()
+        login_django(request, user)
+
+        # return redirect('plataforma')
+        return HttpResponse("funcionou - pelo cadastro")
+
+def login(request):
+    if request.method == "GET":
+        return render(request, 'login.html')
+    else:
+        nome = request.POST.get('nome')
+        senha = request.POST.get('senha')
+
+        user = authenticate(username=nome, password=senha)
+
+        if user:
+            login_django(request, user)
+            # return redirect('plataforma')
+            return HttpResponse("funcionou - pelo login")
+            
+        else:
+            return HttpResponse("noooo")
+        
+def logout_view(request):
+    logout(request)
+    return redirect('/login') 
+
+
+@login_required(login_url='/login/')
+def plataforma(request):
+    return HttpResponse("teste")
