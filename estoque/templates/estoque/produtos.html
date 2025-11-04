@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% for produto in produtos %}
+        {{ produto.nome_produto }}
+
+        {{ produto.qtd_produto }}
+
+        
+        <a href="{% url 'deletar_produto' produto.pk %}">deletar</a>
+        <a href="{% url 'editar_produto' produto.pk %}">editar</a>
+
+        {% if produto.qtd_produto < produto.qtd_minima %}
+        PRODUTO PRECISA SER REESTOCADO IMEDIATAMENTE!
+        {% endif %}
+        <br>
+    {% endfor %}
+
+    <a href="{% url 'adicionar_produto' %}">adicionar_produto</a>
+</body>
+</html>
