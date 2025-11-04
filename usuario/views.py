@@ -3,6 +3,7 @@ from django.contrib.auth.models import User # na docs, mostra que já temos "cri
 from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login as login_django
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .models import *
 # Create your views here.
 def cadastro(request):
@@ -14,7 +15,8 @@ def cadastro(request):
         user = User.objects.filter(username=nome).first()
         
         if user:
-            return HttpResponse('Já existe um user com este codi!')
+            messages.error(request, "Já existe um usuário com este nick, experimente outro!")
+            return redirect('cadastro')        
         
         user = User.objects.create_user(username=nome, password=senha)
         user.save()
@@ -38,7 +40,8 @@ def login(request):
             return HttpResponse("funcionou - pelo login")
             
         else:
-            return HttpResponse("noooo")
+            messages.error(request, "Usuário ou senha incorretos. Verifique as informações.")
+            return redirect('login')        
         
 def logout_view(request):
     logout(request)
