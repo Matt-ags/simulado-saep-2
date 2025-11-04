@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}Cadastro{% endblock %}
+
+{% block content %}
+
     {% for obj_historico in historico %}
         {{ obj_historico.id_usuario }}
         {{ obj_historico.nome_produto }}
@@ -13,5 +11,5 @@
         {{ obj_historico.data_hora }}
         <br>
     {% endfor %}
-</body>
-</html>
+    
+{% endblock content %}
