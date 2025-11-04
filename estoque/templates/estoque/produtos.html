@@ -9,14 +9,17 @@
     {% for produto in produtos %}
         {{ produto.nome_produto }}
 
-        <button name="reduzir">-</button>
         {{ produto.qtd_produto }}
-        <button name="adicionar">+</button>
+
         
         <a href="{% url 'deletar_produto' produto.pk %}">deletar</a>
+        <a href="{% url 'editar_produto' produto.pk %}">editar</a>
+
+        {% if produto.qtd_produto < produto.qtd_minima %}
+        PRODUTO PRECISA SER REESTOCADO IMEDIATAMENTE!
+        {% endif %}
         <br>
     {% endfor %}
-    olá mundo
 
     <a href="{% url 'adicionar_produto' %}">adicionar_produto</a>
 </body>
