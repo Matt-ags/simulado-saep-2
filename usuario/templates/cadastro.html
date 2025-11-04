@@ -3,36 +3,46 @@
 {% block title %}Cadastro{% endblock %}
 
 {% block content %}
+<style>
+    .form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255,193,7,.4) !important; /* amarelo */
+}
 
-<form action="{% url 'cadastro' %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
+</style>
+<div class="row justify-content-center">
+    <div class="col-md-5">
 
-        <!-- Conteúdo Tabs -->
-        <div class="tab-content" id="cadastroTabContent">
+        <div class="card shadow-sm border-0 rounded-4">
+            <div class="card-body p-4 p-md-5">
 
-          <!-- Passo 1 -->
-          <div class="tab-pane fade show active" id="identidade-pane" role="tabpanel" aria-labelledby="identidade-tab">
-            <div class="d-flex flex-column gap-3">
+                <h3 class="text-center mb-4 fw-bold">Criar Acesso</h3>
 
-              <div>
-                <label for="codinome" class="form-label fw-bold text-light">Nome</label>
-                <input type="text" class="form-control shadow-sm" id="nome" name="nome"
-                  placeholder="Digite seu Nome..." required>
-              </div>
+                <form action="{% url 'cadastro' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
 
-              <div>
-                <label for="senha" class="form-label fw-bold text-light">Senha</label>
-                <input type="password" class="form-control shadow-sm" id="senha" name="senha"
-                  placeholder="Digite sua senha..." required>
-              </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Nome</label>
+                        <input type="text" class="form-control form-control-lg bg-light border-0 shadow-sm"
+                               id="nome" name="nome" placeholder="Digite seu nome..." required>
+                    </div>
 
-              <div class="text-center mt-4">
-                <button type="submit" class="btn btn-warning fw-bold shadow px-5 py-2 rounded-pill">
-                  Cadastrar
-                </button>
-              </div>
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Senha</label>
+                        <input type="password" class="form-control form-control-lg bg-light border-0 shadow-sm"
+                               id="senha" name="senha" placeholder="Digite sua senha..." required>
+                    </div>
+
+                    <div class="d-flex justify-content-center mt-4">
+                        <button type="submit" class="btn btn-warning btn-lg fw-bold text-dark px-5 py-2 rounded-pill shadow">
+                            Cadastrar
+                        </button>
+                    </div>
+                </form>
+
             </div>
-          </div>
-</form>
+        </div>
+
+    </div>
+</div>
 
 {% endblock %}
