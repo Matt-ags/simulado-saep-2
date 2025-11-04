@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="text-black mb-4">Usuário logado: {{ usuario.username }}</h2>
+
+<form method="get" class="mb-3">
+  <div class="row g-2">
+    <div class="col-md-8">
+        <input type="text" name="q" class="form-control" placeholder="Pesquisar produto...">
+    </div>
+    <div class="col-md-3">
+        <select name="tipo" class="form-control">
+            <option value="">Todos</option>
+            <option value="smartphone">Celular</option>
+            <option value="notebook">Notebook</option>
+            <option value="smart_tv">Smart TV</option>
+        </select>
+    </div>
+    <div class="col-md-1">
+        <button class="btn btn-warning w-100">Filtrar</button>
+    </div>
+  </div>
+</form>
+
+<table class="table table-dark table-striped">
+    <thead>
+        <tr>
+            <th>Nome Produto</th>
+            <th>Quantidade Atual</th>
+            <th>Quantidade Minima</th>
+            <th>Tipo</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in produtos %}
+        <tr>
+            <td>{{ p.nome_produto }}</td>
+            <td>{{ p.qtd_produto }}</td>
+            <td>{{ p.qtd_minima }}</td>
+            <td>{{ p.get_tipo_produto_display }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4" class="text-center text-warning">Nenhum produto cadastrado</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
