@@ -3,7 +3,7 @@ from django.views.generic import CreateView, DeleteView, UpdateView, ListView
 from .models import Estoque, Historico
 from .forms import AddProdutoForm, EditarProdutoForm
 from django.urls import reverse_lazy
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 class ListaProdutos(ListView):
     model = Estoque
@@ -99,3 +99,24 @@ class ListaHistorico(ListView):
     model = Historico
     template_name = 'estoque/historico.html'
     context_object_name = 'historico'
+
+@login_required(login_url='/login')
+def teste(request):
+    busca = request.GET.get('q')
+    tipo = request.GET.get('tipo')
+
+    produtos = Estoque.objects.all()
+
+    if busca:
+        produtos = produtos.filter(nome_produto__icontains=busca)
+
+    if tipo:
+        produtos = produtos.filter(tipo_produto=tipo)
+
+
+    return render(request, 'estoque/teste.html', {
+        "usuario": request.user,
+        "produtos": produtos,
+    })
+
+

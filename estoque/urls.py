@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ListaProdutos, AddProduto, DeletarProduto, EditarProduto, ListaHistorico
+from .views import ListaProdutos, AddProduto, DeletarProduto, EditarProduto, ListaHistorico, teste
 
 urlpatterns = [
     path('produtos/', ListaProdutos.as_view(), name='produtos_estoque'),
@@ -9,4 +9,7 @@ urlpatterns = [
     
     # historico
     path('historico/', ListaHistorico.as_view(), name='historico'),
+
+    path('teste', teste, name='teste'),
+
 ]
