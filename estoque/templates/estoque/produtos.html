@@ -44,6 +44,25 @@
 
     </style>
     <div class="container d-flex flex-column align-center">
+        
+        <form method="get" class="mb-3">
+            <div class="row g-2">
+                <div class="col-md-8">
+                    <input type="text" name="q" class="form-control" placeholder="Pesquisar produto...">
+                </div>
+                <div class="col-md-3">
+                    <select name="tipo" class="form-control">
+                        <option value="">Todos</option>
+                        <option value="smartphone">Celular</option>
+                        <option value="notebook">Notebook</option>
+                        <option value="smart_tv">Smart TV</option>
+                    </select>
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-warning w-100">Filtrar</button>
+                </div>
+            </div>
+        </form>
         <div class="table-responsive mt-3">
             <table class="table table-bordered text-center">
                 <thead>
@@ -92,7 +111,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="d-flex justify-content-center gap-2">
+        <div class="d-flex justify-content-center gap-2 mt-2">
             <a class='button' href="{% url 'adicionar_produto' %}">Adicionar produto</a>
             <a class="button" href="{% url 'historico' %}">Ver historico</a>
         </div>

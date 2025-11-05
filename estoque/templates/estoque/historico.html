@@ -5,7 +5,7 @@
 {% block content %}
     <style>
         .table-responsive{
-                max-height: 650px; 
+                max-height: 630px; 
                 overflow-y: auto; 
             }
 
@@ -38,6 +38,45 @@
         }
 
     </style>
+<form method="get" class="mb-3">
+    <div class="row g-2">
+
+        <!-- Campo de busca por nome -->
+        <div class="col-md-5">
+            <input type="text" name="nome" class="form-control" 
+                   placeholder="Pesquisar produto..." 
+                   value="{{ request.GET.nome }}">
+        </div>
+
+        <!-- Filtro por ação -->
+        <div class="col-md-3">
+            <select name="acao" class="form-control">
+                <option value="">Todas as ações</option>
+                {% for valor, descricao in acoes_disponiveis %}
+                    <option value="{{ valor }}" {% if request.GET.acao == valor %}selected{% endif %}>
+                        {{ descricao }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Filtro por data -->
+        <div class="col-md-2">
+            <input type="date" name="data" class="form-control" value="{{ request.GET.data }}">
+        </div>
+
+        <!-- Botão Filtrar -->
+        <div class="col-md-1">
+            <button class="btn btn-warning w-100">Filtrar</button>
+        </div>
+
+        <!-- Botão Limpar -->
+        <div class="col-md-1">
+            <a href="{% url 'historico' %}" class="btn btn-outline-secondary w-100">Limpar</a>
+        </div>
+
+    </div>
+</form>
 <div class="table-responsive mt-3">
     <table class="table table-bordered text-center">
         <thead>
@@ -52,7 +91,7 @@
             <td>{{ obj_historico.id_usuario }}</td>
             <td>{{ obj_historico.nome_produto }}</td>
             <td>{{ obj_historico.acao }}</td>
-            <td>{{ obj_historico.data_hora }}</td>
+            <td>{{ obj_historico.data_hora_formatada }}</td>
         </tr>
         {% endfor %}
     </table>

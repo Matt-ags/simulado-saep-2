@@ -34,3 +34,7 @@ class Historico(models.Model):
 
     acao = models.CharField(max_length=20, choices=ESCOLHA_ACAO)
     data_hora = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def data_hora_formatada(self):
+        return self.data_hora.strftime("%d/%m/%Y - %I:%M %p")

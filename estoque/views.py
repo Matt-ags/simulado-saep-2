@@ -99,9 +99,33 @@ class ListaHistorico(ListView):
     model = Historico
     template_name = 'estoque/historico.html'
     context_object_name = 'historico'
+    ordering = ['nome_produto']
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+
+        nome = self.request.GET.get('nome')
+        acao = self.request.GET.get('acao')
+        data = self.request.GET.get('data')
+
+        if nome:
+            queryset = queryset.filter(nome_produto__icontains=nome)
+
+        if acao:
+            queryset = queryset.filter(acao__iexact=acao)
+
+        if data:
+            queryset = queryset.filter(data_hora__date=data)
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['acoes_disponiveis'] = Historico.ESCOLHA_ACAO
+        return context
 
 @login_required(login_url='/login')
-def teste(request):
+def listar_filtrar(request):
     busca = request.GET.get('q')
     tipo = request.GET.get('tipo')
 
@@ -113,8 +137,9 @@ def teste(request):
     if tipo:
         produtos = produtos.filter(tipo_produto=tipo)
 
+    produtos = produtos.order_by('nome_produto')
 
-    return render(request, 'estoque/teste.html', {
+    return render(request, 'estoque/produtos.html', {
         "usuario": request.user,
         "produtos": produtos,
     })
