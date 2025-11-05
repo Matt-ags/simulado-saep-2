@@ -4,6 +4,12 @@
 
 {% block content %}
     <style>
+
+        .table-responsive{
+            max-height: 650px; 
+            overflow-y: auto; 
+        }
+
         th, td{
             vertical-align: middle;
         }
@@ -20,6 +26,10 @@
             border: 2px solid #000;
             padding: 4px 7px;
             border-radius: 5px;
+
+            min-width: 147px;
+
+            text-align: center;
 
             color: #000;
 
@@ -69,7 +79,7 @@
 
                             
                             <td><a href="{% url 'deletar_produto' produto.pk %}">deletar</a></td>
-                            <td><a href="{% url 'editar_produto' produto.pk %}">editar</a></td>
+                            <td><a href="{% url 'editar_produto' produto.pk %}">editar_qtd</a></td>
 
                             {% if produto.qtd_produto < produto.qtd_minima %}
                                 <td class="aviso" style="color: red;">ATENÇÃO!!!</td>
@@ -82,6 +92,9 @@
                 </tbody>
             </table>
         </div>
-        <a class='button' href="{% url 'adicionar_produto' %}">Adicionar produto</a>
+        <div class="d-flex justify-content-center gap-2">
+            <a class='button' href="{% url 'adicionar_produto' %}">Adicionar produto</a>
+            <a class="button" href="{% url 'historico' %}">Ver historico</a>
+        </div>
     </div>
 {% endblock content %}

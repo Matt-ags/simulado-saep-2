@@ -21,6 +21,12 @@ class AddProduto(CreateView):
     template_name = 'estoque/adicionar_produto.html'
     success_url = reverse_lazy('produtos_estoque')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['view'] = self
+        self.action = 'add'  # ← aqui definimos o valor
+        return context
+
     def form_valid(self, form):
         self.object = form.save()
 
@@ -37,6 +43,12 @@ class EditarProduto(UpdateView):
     form_class = EditarProdutoForm
     template_name = 'estoque/adicionar_produto.html'
     success_url = reverse_lazy('produtos_estoque')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['view'] = self
+        self.action = 'editar'  # ← aqui definimos o valor
+        return context
 
     def form_valid(self, form):
         produto_antigo = Estoque.objects.get(pk=self.object.pk)
