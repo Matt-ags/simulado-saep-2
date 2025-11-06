@@ -18,7 +18,7 @@ Este repositório contém um projeto Django com duas aplicações principais:
 
 ```powershell
 python -m venv .venv
-.\.venv\Scripts\Activate.ps1
+venv\Scripts\Activate
 ```
 
 2. Instale dependências
