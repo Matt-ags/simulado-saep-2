@@ -29,6 +29,9 @@
                 <li class="nav-item"><a class="nav-link" href="{% url 'login' %}"><i class="bi bi-house-fill"></i> Início</a></li>
                 {% if user.is_authenticated %}
                     <li class="nav-item"><a class="nav-link" href="{% url 'cadastro' %}"><i class="bi bi-activity"></i> Cadastro</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'historico' %}"></i> Histórico</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'produtos_estoque' %}"></i> Produtos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'adicionar_produto' %}"></i> Adicionar Produto</a></li>
                 {% endif %}
             </ul>
 
